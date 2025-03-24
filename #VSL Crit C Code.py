@@ -1,4 +1,3 @@
-from logging import root
 import random
 import json
 import tkinter as tk
@@ -148,11 +147,13 @@ def hangman(email, master_window):
         if "_" not in display_word:
             messagebox.showinfo("Game Over", "Congratulations! You guessed the word!")
             update_user_progress(email, score, word_to_guess)
-            game_window.withdraw()
+            game_window.destroy()
+            game_menu(email, master_window)
         elif attempts_remaining == 0:
             messagebox.showerror("Game Over", f"Game over! The word was: {word_to_guess}",
                                     parent=game_window)
-            game_window.withdraw()
+            game_window.destroy()
+            game_menu(email,master_window)
 
     guess_button = tk.Button(game_window, text="Guess a Letter", command=make_guess)
     guess_button.pack(pady=10)
@@ -231,4 +232,4 @@ def main_interface():
     root.mainloop()  # Start the Tkinter main event loop
 
 if __name__ == "__main__":
-    main_interface() 
+    main_interface()  # Calling the function to start the UI
